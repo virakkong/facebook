@@ -28,9 +28,20 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
     
     $scope.isLoggedIn =false;
     
+    //variable no var for $scope
     $scope.login =function() {
         $facebook.login().then(function() {
             console.log("Logged In");
+            $scope.isLoggedIn =true;
+            refresh();
+        });
+    }
+    
+    $scope.logout =function() {
+        $facebook.logout().then(function() {
+            console.log("Logged Out");
+            $scope.isLoggedIn =false;
+            refresh();
         });
     }
     
