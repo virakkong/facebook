@@ -75,4 +75,16 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
     
     }//end of refresh
     refresh();
+    
+    //to allow post
+    $scope.postStatus= function() {
+       // var body = this.body;
+        var body = this.body;
+        
+        $facebook.api('/me/feed','post',{message: body}).then(function(response){
+            $scope.msg="Thank for Posting";
+            refresh();
+            
+        })
+    }
 }]); //end of controller  

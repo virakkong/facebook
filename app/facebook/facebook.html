@@ -31,7 +31,7 @@
 
             </ul>
         </div>
-        <div class="well">
+        <div class="well" ng-if="isLoggedIn==true" >
             <h4>Permissions</h4>
             <ul>
                 <li ng-repeat="permission in permissions">{{permission.permission}} - {{permission.status}}</li>
@@ -40,10 +40,12 @@
     </div>
 
     <div class="col-md-8">
-        <form>
+       <h3>Welcome to Facebook!</h3>
+       <div ng-if="isLoggedIn==true">
+        <form ng-submit="postStatus()">
             <div class="form-group">
                 <label>Status Update</label>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control ng-pristine ng-valid" ng-model="body"></textarea>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
@@ -58,6 +60,9 @@
                 <div class="sttime">{{post.updated_time}}</div>
             </div>
         </div>
-
+    </div>
+        <div ng-if="isLoggedIn==false">
+            <p>Login is Required. Please Login to post!</p>
+        </div>
     </div>
 </div>
