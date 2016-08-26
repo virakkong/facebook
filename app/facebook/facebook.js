@@ -53,6 +53,9 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
             $scope.isLoggedIn =true;
             $facebook.api('/me/picture').then(function(response) {
                 $scope.picture=response.data.url;
+                $facebook.api('/me/permissions').then(function(response){
+                    $scope.permissions = response.data;
+                });
             });
                                 
         },
