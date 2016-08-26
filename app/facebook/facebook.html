@@ -1,18 +1,33 @@
 <div class="row" ng-controller="FacebookCtrl">
     <div class="col-md-4">
-        <h4>Welcome to My Social Network</h4>
+       
+        <h4>{{welcomeMsg}}</h4>
+        <div ng-if="isLoggedIn==true">
+            <a href="{{userInfo.link}}" target="_blank" ><img ng-src="{{picture}}"></a>
+        </div>
+  
+        
+        <div ng-if="isLoggedIn==false">
+        <!--        if isLoggedIn is false, we want to see login button-->
         <button type="button" class="btn btn-default" ng-click="login()">Login</button>
+        </div>
+        
+        <div ng-if="isLoggedIn==true">
+        <!--        if isLoggedIn is true, we want to see logout button-->
+        <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
+        </div>
         <br>
         <br>
-        <div class="well">
+        <div ng-if="isLoggedIn==true" class="well" >
             <h4>User Information</h4>
-            <ul>
-                <li>ID: </li>
-                <li>First Name: Kong</li>
-                <li>Last Name: Kong</li>
-                <li>Email: vireakyutkong@gmail.com</li>
-                <li>Gender: Male</li>
-                <li>Local: enGB</li>
+            <ul> 
+<!--               https://developers.facebook.com/docs/graph-api/reference/user-->
+                <li>ID: {{user.id}}</li>
+                <li>First Name: {{user.first_name}}</li>
+                <li>Last Name: {{user.last_name}}</li>
+                <li>Email: {{user.email}}</li>
+                <li>Gender: {{user.gender}}</li>
+                <li>Local: {{user.locale}}</li>
 
             </ul>
         </div>

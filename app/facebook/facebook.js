@@ -47,17 +47,20 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
     
     function refresh() {
         $facebook.api("/me").then(function(response){
-            $scope.welcomeMsg="Welcome" + response.name;
+            $scope.welcomeMsg="Welcome " + response.name;
+            $scope.user=response;
             $scope.isLoggedIn =true;
-            $scope.userInfo=resppnse;                       
+            $facebook.api('/me/picture').then(function(response) {
+                $scope.picture=response.data.url;
+            });
                                 
         },
         function (err) {
-            $scope.welcomMsg ="Please Login";
+            $scope.welcomeMsg ="Please Login";
         }
                                   
         ); //end of then
     
     }//end of refresh
-
+    refresh();
 }]); //end of controller  
