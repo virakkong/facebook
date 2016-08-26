@@ -24,11 +24,29 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 })
-.controller('FacebookCtrl',['$scope','$facebook', [function($scope,$facebook) {
+.controller('FacebookCtrl',['$scope','$facebook', function($scope,$facebook) {
+    
     $scope.isLoggedIn =false;
+    
+    $scope.login =function() {
         $facebook.login().then(function() {
             console.log("Logged In");
         });
-}
+    }
     
-}]);
+    function refresh() {
+        $facebook.api("/me").then(function(response){
+            $scope.welcomeMsg="Welcome" + response.name;
+            $scope.isLoggedIn =true;
+            $scope.userInfo=resppnse;                       
+                                
+        },
+        function (err) {
+            $scope.welcomMsg ="Please Login";
+        }
+                                  
+        ); //end of then
+    
+    }//end of refresh
+
+}]); //end of controller  
